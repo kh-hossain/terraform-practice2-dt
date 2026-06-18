@@ -73,3 +73,12 @@ variable "db_vm_network_tag" {
   type        = string
   description = "Network tag for the database VM"
 }
+
+variable "iap_authorized_members" {
+  type        = list(string)
+  description = "IAM members allowed to SSH to the bastion through IAP"
+  default     = [] # Makes the module more flexible - even if not set, it won't cause an error
+
+  # Example:
+  # ["user:your-email@example.com"]
+}

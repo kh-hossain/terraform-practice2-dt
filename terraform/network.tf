@@ -23,3 +23,29 @@ module "vpc" {
   ]
 }
 # tftest modules=1 resources=6 inventory=simple.yaml e2e
+
+module "db_vm_firewall" {
+  source = "git::https://github.com/GoogleCloudPlatform/cloud-foundation-fabric.git//modules/net-vpc-firewall?ref=v55.4.0"
+
+  project_id = var.project_id
+  network    = var.network_name
+
+  default_rules_config = {
+    disabled = true
+  }
+
+  ingress_rules = {
+    allow-iap-ssh-to-db-vm = {
+      description   = "Allow SSH to database VM only through IAP"
+      source_ranges = ["35.235.240.0/20"]
+      targets       = [var.db_vm_network_tag]
+
+      rules = [
+        {
+          protocol = "tcp"
+          ports    = ["22"]
+        }
+      ]
+    }
+  }
+}
