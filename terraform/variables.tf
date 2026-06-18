@@ -38,3 +38,20 @@ variable "activity_name" {
   type        = string
   description = "Name of the activity for tagging purposes"
 }
+
+# Variables for network configuration
+
+variable "vpc_name" {
+  type        = string
+  description = "Name of the VPC network"
+}
+
+variable "management_subnet_name" {
+  type        = string
+  description = "Name of the management subnet"
+}
+
+variable "management_subnet_cidr" {
+  type        = string
+  description = "CIDR range for the management subnet"
+}
