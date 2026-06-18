@@ -4,6 +4,7 @@ module "db_vm" {
   project_id   = var.project_id
   zone         = var.default_zone
   name         = var.db_vm_name
+  labels = locals.common_labels
 
   machine_type = "e2-micro"
 

@@ -28,7 +28,7 @@ module "db_vm_firewall" {
   source = "git::https://github.com/GoogleCloudPlatform/cloud-foundation-fabric.git//modules/net-vpc-firewall?ref=v55.4.0"
 
   project_id = var.project_id
-  network    = var.network_name
+  network    = var.vpc_name
 
   default_rules_config = {
     disabled = true
