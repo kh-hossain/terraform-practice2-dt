@@ -29,9 +29,9 @@ variable "owner" {
   type        = string
 }
 
-variable "tf_repo_name" {
+variable "git_repo_name" {
   type        = string
-  description = "Name of the Terraform code repository for tagging purposes"
+  description = "Name of the Git repository for tagging purposes"
 }
 
 variable "activity_name" {

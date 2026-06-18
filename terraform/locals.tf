@@ -6,7 +6,7 @@ locals {
   common_labels = {
     managed_by  = "terraform"
     environment = replace(lower(var.environment), ".", "-")
-    repo        = replace(lower(var.tf_repo_name), ".", "-")
+    repo        = replace(lower(var.git_repo_name), ".", "-")
     activity    = replace(lower(var.activity_name), ".", "-")
     owner       = replace(lower(var.owner), ".", "-")
   }
