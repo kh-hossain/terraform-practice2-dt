@@ -11,3 +11,9 @@ locals {
     owner       = replace(lower(var.owner), ".", "-")
   }
 }
+
+# Network configuration locals
+
+locals {
+  management_subnet_key = "${var.region}/${var.management_subnet_name}"
+}

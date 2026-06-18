@@ -11,6 +11,12 @@ variable "region" {
   default     = "us-central1"
 }
 
+variable "default_zone" {
+  type        = string
+  description = "Default GCP zone"
+  default     = "us-central1-c"
+}
+
 variable "terraform_service_account" {
   type        = string
   description = "Service account used by Terraform through impersonation"
@@ -54,4 +60,16 @@ variable "management_subnet_name" {
 variable "management_subnet_cidr" {
   type        = string
   description = "CIDR range for the management subnet"
+}
+
+# Variables for the database VM
+
+variable "db_vm_name" {
+  type        = string
+  description = "Name of the database VM"
+}
+
+variable "db_vm_network_tag" {
+  type        = string
+  description = "Network tag for the database VM"
 }
