@@ -17,3 +17,12 @@ locals {
 locals {
   db_subnet_key = "${var.region}/${var.db_subnet_name}"
 }
+
+# DR appliance locals
+
+locals {
+  ncc_network_roles = toset([
+    "roles/networkconnectivity.spokeAdmin",
+    "roles/compute.networkUser",
+  ])
+}

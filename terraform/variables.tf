@@ -82,3 +82,17 @@ variable "iap_authorized_members" {
   # Example:
   # ["user:your-email@example.com"]
 }
+
+# DR Applicance variables
+
+variable backup_dr_appliance_sa {
+  type        = string
+  description = "Service account for the DR appliance"
+  sensitive   = true
+}
+
+variable ncc_spoke_admin_members {
+  type        = list(string)
+  description = "IAM members for the NCC spoke admin role"
+  default     = [] # Makes the module more flexible - even if not set, it won't cause an error
+}
