@@ -5,9 +5,9 @@ output "vpc_self_link" {
   value       = module.vpc.self_link
 }
 
-output "management_subnet_self_link" {
-  description = "Management subnet self link"
-  value       = module.vpc.subnet_self_links[local.management_subnet_key]
+output "db_subnet_self_link" {
+  description = "Database subnet self link"
+  value       = module.vpc.subnet_self_links[local.db_subnet_key]
 }
 
 # Database VM outputs

@@ -15,5 +15,5 @@ locals {
 # Network configuration locals
 
 locals {
-  management_subnet_key = "${var.region}/${var.management_subnet_name}"
+  db_subnet_key = "${var.region}/${var.db_subnet_name}"
 }

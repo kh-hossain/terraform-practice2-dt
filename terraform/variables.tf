@@ -52,14 +52,14 @@ variable "vpc_name" {
   description = "Name of the VPC network"
 }
 
-variable "management_subnet_name" {
+variable "db_subnet_name" {
   type        = string
-  description = "Name of the management subnet"
+  description = "Name of the database subnet"
 }
 
-variable "management_subnet_cidr" {
+variable "db_subnet_cidr" {
   type        = string
-  description = "CIDR range for the management subnet"
+  description = "CIDR range for the database subnet"
 }
 
 # Variables for the database VM

@@ -1,9 +1,9 @@
 module "db_vm" {
   source = "git::https://github.com/GoogleCloudPlatform/cloud-foundation-fabric.git//modules/compute-vm?ref=v55.4.0"
 
-  project_id   = var.project_id
-  zone         = var.default_zone
-  name         = var.db_vm_name
+  project_id = var.project_id
+  zone       = var.default_zone
+  name       = var.db_vm_name
 
   machine_type = "e2-micro"
 
@@ -21,7 +21,7 @@ module "db_vm" {
   network_interfaces = [
     {
       network    = module.vpc.self_link
-      subnetwork = module.vpc.subnet_self_links["${var.region}/${var.management_subnet_name}"]
+      subnetwork = module.vpc.subnet_self_links["${var.region}/${var.db_subnet_name}"]
     }
   ]
 
@@ -32,7 +32,7 @@ module "db_vm" {
     #startup-script = file("${path.module}/startup.sh")
   }
 
-    service_account = {
+  service_account = {
     auto_create = true
   }
 

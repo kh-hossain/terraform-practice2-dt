@@ -4,8 +4,8 @@ module "vpc" {
   name       = var.vpc_name
   subnets = [
     {
-      ip_cidr_range         = var.management_subnet_cidr
-      name                  = var.management_subnet_name
+      ip_cidr_range         = var.db_subnet_cidr
+      name                  = var.db_subnet_name
       region                = var.region
       enable_private_access = true
 
@@ -52,10 +52,6 @@ module "vpn_ha" {
   network    = module.vpc.self_link
   name       = "${local.name_prefix}-db-to-backend-vpn-ha"
 
-  peer_gateways = {
-    default = { gcp = module.vpn-2.self_link }
-  }
-
   router_config = {
     asn = 64514
   }
@@ -77,7 +73,7 @@ module "cloud_nat" {
 
     subnetworks = [
       {
-        self_link     = module.vpc.subnet_self_links["${var.region}/${var.management_subnet_name}"]
+        self_link     = module.vpc.subnet_self_links["${var.region}/${var.db_subnet_name}"]
         all_ranges    = false
         primary_range = true
       }
