@@ -14,7 +14,7 @@ module "db_vm" {
     }
 
     source = {
-      image = "ubuntu-os-cloud/ubuntu-2404-lts"
+      image = "debian-cloud/debian-13"
     }
   }
 
