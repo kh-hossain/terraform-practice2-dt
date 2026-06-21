@@ -63,29 +63,5 @@ module "vpn-ha" {
 
   router_config = {
     asn = 64514
-    custom_advertise = {
-      all_subnets = true
-      ip_ranges = {
-        "10.0.0.0/8" = "default"
-      }
-    }
-  }
-  tunnels = {
-    remote-0 = {
-      bgp_peer = {
-        address = "169.254.1.1"
-        asn     = 64513
-      }
-      bgp_session_range     = "169.254.1.2/30"
-      vpn_gateway_interface = 0
-    }
-    remote-1 = {
-      bgp_peer = {
-        address = "169.254.2.1"
-        asn     = 64513
-      }
-      bgp_session_range     = "169.254.2.2/30"
-      vpn_gateway_interface = 1
-    }
   }
 }

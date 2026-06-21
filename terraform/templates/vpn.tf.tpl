@@ -163,9 +163,17 @@ module "vpn_ha" {
     #
     # ip_ranges:
     #   Explicitly advertise only selected ranges.
+
+    # With custom_advertise:
+    #   You explicitly control which routes your Cloud Router advertises to the peer.
+
+    # Without custom_advertise:
+    #   Cloud Router automatically advertises eligible subnet routes from your VPC.
+
     custom_advertise = {
       all_subnets = false
       ip_ranges   = local.vpn_advertised_ip_ranges
+      # ip_ranges   = (var.management_subnet_cidr) = "management-subnet"
     }
   }
 
@@ -179,6 +187,10 @@ module "vpn_ha" {
   #   remote-1 -> HA VPN gateway interface 1
   #
   # Your BGP IPs and your colleague's BGP IPs must mirror each other.
+
+  # The Fabric variable comments say each BGP session on the same Cloud Router must use a unique /30 CIDR from 169.254.0.0/16
+
+  # Fabric uses each tunnels entry to create a VPN tunnel, a Cloud Router interface, and a Cloud Router BGP peer.
   ##############################################################################
   tunnels = {
     remote-0 = {
