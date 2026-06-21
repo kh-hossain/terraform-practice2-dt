@@ -20,9 +20,8 @@ module "db_vm" {
 
   network_interfaces = [
     {
-      network    = var.vpc_self_link
-      subnetwork = var.management_subnet_self_link
-      nat        = true
+      network    = module.vpc.self_link
+      subnetwork = module.vpc.subnet_self_links["${var.region}/${var.management_subnet_name}"]
     }
   ]
 

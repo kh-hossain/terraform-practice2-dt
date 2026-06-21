@@ -11,8 +11,3 @@ output "management_subnet_self_link" {
 }
 
 # Database VM outputs
-
-output "db_vm_sa_iam_email" {
-    description = "Auto-created service account's email for the database VM"
-  value = module.db_vm.service_account_iam_email
-}

@@ -9,11 +9,6 @@ module "vpc" {
       region                = var.region
       enable_private_access = true
 
-      secondary_ip_ranges = {
-        pods     = { ip_cidr_range = "172.16.0.0/20" }
-        services = { ip_cidr_range = "192.168.0.0/24" }
-      }
-
       flow_logs_config = {
         aggregation_interval = "INTERVAL_5_SEC"
         flow_sampling        = 0.5
@@ -50,7 +45,7 @@ module "db_vm_firewall" {
   }
 }
 
-module "vpn-ha" {
+module "vpn_ha" {
   source     = "git::https://github.com/GoogleCloudPlatform/cloud-foundation-fabric.git//modules/net-vpn-ha?ref=v55.4.0"
   project_id = var.project_id
   region     = var.region
@@ -63,5 +58,29 @@ module "vpn-ha" {
 
   router_config = {
     asn = 64514
+  }
+}
+
+module "cloud_nat" {
+  source = "git::https://github.com/GoogleCloudPlatform/cloud-foundation-fabric.git//modules/net-cloudnat?ref=v55.4.0"
+
+  project_id     = var.project_id
+  region         = var.region
+  name           = "${local.name_prefix}-nat"
+  router_network = module.vpc.self_link
+
+  router_create = false
+  router_name   = module.vpn_ha.router_name
+
+  config_source_subnetworks = {
+    all = false
+
+    subnetworks = [
+      {
+        self_link     = module.vpc.subnet_self_links["${var.region}/${var.management_subnet_name}"]
+        all_ranges    = false
+        primary_range = true
+      }
+    ]
   }
 }
