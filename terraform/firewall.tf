@@ -21,24 +21,24 @@ module "db_vm_firewall" {
         }
       ]
     }
-  }
 
     allow-backup-dr-appliance-to-db-vm = {
-      description = "Allow Backup and DR appliance traffic to DB VM"
+      description   = "Allow Backup and DR appliance traffic to DB VM"
       source_ranges = ["10.10.0.0/24"]
-      targets = [local.db_vm_network_tag]
+      targets       = [var.db_vm_network_tag]
 
-       rules = [
-      {
-        protocol = "tcp"
-        ports = [
-          "26",
-          "443",
-          "3260",
-          "5106",
-          "5107",
-        ]
-      }
-    ]
+      rules = [
+        {
+          protocol = "tcp"
+          ports = [
+            "26",
+            "443",
+            "3260",
+            "5106",
+            "5107",
+          ]
+        }
+      ]
+    }
   }
 }

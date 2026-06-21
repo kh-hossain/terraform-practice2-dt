@@ -30,7 +30,7 @@ resource "google_project_iam_member" "backup_dr_compute_engine_operator" {
 
 resource "google_project_iam_member" "ncc_network_permissions" {
   for_each = {
-    for pair in setproduct(var.ncc_spoke_admin_members, local.ncc_network_roles) :
+    for pair in setproduct(toset(var.ncc_spoke_admin_members), local.ncc_network_roles) :
     "${pair[0]}-${pair[1]}" => {
       member = pair[0]
       role   = pair[1]
