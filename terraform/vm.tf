@@ -14,7 +14,7 @@ module "db_vm" {
     }
 
     source = {
-      image = "debian-cloud/debian-13"
+      image = "cos-cloud/cos-stable"
     }
   }
 

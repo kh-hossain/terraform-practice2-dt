@@ -39,8 +39,8 @@ module "cloud_nat" {
   name           = "${local.name_prefix}-nat"
   router_network = module.vpc.self_link
 
-  router_create = false
-  router_name   = module.vpn_ha.router_name
+  router_create = true
+  router_name   = "${local.name_prefix}-nat-router"
 
   config_source_subnetworks = {
     all = false
